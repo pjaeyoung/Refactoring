@@ -29,14 +29,9 @@ function printOwing(invoice) {
 }
 
 export default function printOwingUpdated(invoice) {
-  let outstanding = 0;
-
   printBanner();
 
-  // 미해결 채무(outstanding)를 계산한다.
-  for (const o of invoice.order) {
-    outstanding += o.amount;
-  }
+  const outstanding = calculateOutstanding(invoice);
 
   recordDueDate(invoice);
   printDetail(invoice, outstanding);
@@ -60,5 +55,13 @@ export default function printOwingUpdated(invoice) {
       today.getMonth(),
       today.getDate() + 30
     );
+  }
+
+  function calculateOutstanding(invoice) {
+    let result = 0;
+    for (const o of invoice.order) {
+      result += o.amount;
+    }
+    return result;
   }
 }
