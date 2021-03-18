@@ -46,7 +46,7 @@ export default function printOwingUpdated(invoice) {
     today.getDate() + 30
   );
 
-  printDetail();
+  printDetail(invoice, outstanding);
 
   function printBanner() {
     console.log("*************");
@@ -54,7 +54,7 @@ export default function printOwingUpdated(invoice) {
     console.log("*************");
   }
 
-  function printDetail() {
+  function printDetail(invoice, outstanding) {
     console.log(`고객명: ${invoice.customer}`);
     console.log(`채무액: ${outstanding}`);
     console.log(`마감일: ${invoice.dueDate.toLocaleDateString()}`);
