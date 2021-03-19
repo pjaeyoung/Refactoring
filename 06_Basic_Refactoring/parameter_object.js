@@ -25,3 +25,78 @@ const alerts = readingsOutsideRange(
 function readingsOutsideRange(station, min, max) {
   return station.filter((reading) => reading.temp < min || reading.temp > max);
 }
+
+// 리팩토링 - 1
+
+class NumberRange {
+  constructor(min, max) {
+    this._data = { min, max };
+  }
+
+  get min() {
+    return this._data.min;
+  }
+
+  get max() {
+    return this._data.max;
+  }
+}
+
+const operatingPlan = {
+  temperatureFloor: 50,
+  temperatureCeiling: 55,
+};
+
+const alerts = readingsOutsideRange(
+  station,
+  operatingPlan.temperatureFloor,
+  operatingPlan.temperatureCeiling,
+  new NumberRange(
+    operatingPlan.temperatureFloor,
+    operatingPlan.temperatureCeiling
+  )
+);
+
+function readingsOutsideRange(station, min, max, range) {
+  return station.filter(
+    (reading) => reading.temp < range.min || reading.temp > range.max
+  );
+}
+
+// 리팩토링 - 2
+const alerts = readingsOutsideRange(
+  station,
+  new NumberRange(
+    operatingPlan.temperatureFloor,
+    operatingPlan.temperatureCeiling
+  )
+);
+
+function readingsOutsideRange(station, range) {
+  return station.filter(
+    (reading) => reading.temp < range.min || reading.temp > range.max
+  );
+}
+
+// 리팩토링 - 3
+class NumberRange {
+  constructor(min, max) {
+    this._data = { min, max };
+  }
+
+  get min() {
+    return this._data.min;
+  }
+
+  get max() {
+    return this._data.max;
+  }
+
+  contains(number) {
+    return number >= this.min && number <= this.max;
+  }
+}
+
+function readingsOutsideRange(station, range) {
+  return station.filter((reading) => !range.contains(reading));
+}
