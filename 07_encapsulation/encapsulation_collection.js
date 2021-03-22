@@ -33,3 +33,34 @@ export class Course {
     return this._isAdvanced;
   }
 }
+
+// 리팩터링 후
+
+class Person {
+  constructor(name) {
+    this._name = name;
+    this._courses = [];
+  }
+
+  get courses() {
+    return this._courses.slice();
+  }
+
+  addCourse(aCourse) {
+    this._courses.push(aCourse);
+  }
+
+  removeCourse(
+    aCourse,
+    fnIfAbsent = () => {
+      throw new RangeError();
+    }
+  ) {
+    const index = this._courses.indexOf(aCourse);
+    if (index === -1) {
+      fnIfAbsent();
+    } else {
+      this._courses.splice(index, 1);
+    }
+  }
+}
