@@ -4,10 +4,6 @@ export function printYoungestAndTotalSalary(people) {
   )}`;
 
   function calculateTotalSalary(people) {
-    let result = 0;
-    for (const p of people) {
-      result += p.salary;
-    }
     return people.reduce(
       (totalSalary, aPerson) => totalSalary + aPerson.salary,
       0
