@@ -11,5 +11,13 @@ export function printYoungestAndTotalSalary(people) {
     }
   }
 
-  return `최연소: ${youngest}, 총 급여: ${totalSalary}`;
+  return `최연소: ${youngest}, 총 급여: ${calculateTotalSalary(people)}`;
+
+  function calculateTotalSalary(people) {
+    let totalSalary = 0;
+    for (const p of people) {
+      totalSalary += p.salary;
+    }
+    return totalSalary;
+  }
 }
