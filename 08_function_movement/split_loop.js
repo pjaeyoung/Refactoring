@@ -8,7 +8,10 @@ export function printYoungestAndTotalSalary(people) {
     for (const p of people) {
       result += p.salary;
     }
-    return result;
+    return people.reduce(
+      (totalSalary, aPerson) => totalSalary + aPerson.salary,
+      0
+    );
   }
 
   function getYoungest(people) {
