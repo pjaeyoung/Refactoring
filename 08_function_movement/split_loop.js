@@ -12,12 +12,12 @@ export function printYoungestAndTotalSalary(people) {
   }
 
   function getYoungest(people) {
-    let youngest = people[0] ? people[0].age : Infinity;
+    let result = people[0] ? people[0].age : Infinity;
     for (const p of people) {
-      if (p.age < youngest) {
-        youngest = p.age;
+      if (p.age < result) {
+        result = p.age;
       }
     }
-    return youngest;
+    return result;
   }
 }
