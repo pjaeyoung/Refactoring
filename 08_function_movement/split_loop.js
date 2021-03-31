@@ -17,6 +17,6 @@ export function printYoungestAndTotalSalary(people) {
         result = p.age;
       }
     }
-    return result;
+    return Math.min(...people.map((aPerson) => aPerson.age));
   }
 }
