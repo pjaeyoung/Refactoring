@@ -1,13 +1,11 @@
 export function acquireACountryData(input, country) {
   const lines = input.split("\n");
-  let firstLine = true;
   const result = [];
 
-  for (const line of lines) {
-    if (firstLine) {
-      firstLine = false;
-      continue;
-    }
+  const loopItems = lines.slice(1);
+  console.log(loopItems);
+
+  for (const line of loopItems) {
     if (line.trim() === "") continue;
     const record = line.split(",");
     if (record[1].trim() === country) {
