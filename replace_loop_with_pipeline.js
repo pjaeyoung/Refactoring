@@ -6,13 +6,11 @@ export function acquireACountryData(input, country) {
     .slice(1)
     .filter((aLine) => aLine.trim() !== "")
     .map((aLine) => aLine.split(","))
-    .filter((record) => record[1].trim() === country);
+    .filter((record) => record[1].trim() === country)
+    .map((record) => ({ city: record[0].trim(), phone: record[2].trim() }));
 
   for (const record of loopItems) {
-    result.push({
-      city: record[0].trim(),
-      phone: record[2].trim(),
-    });
+    result.push(record);
   }
 
   return result;
